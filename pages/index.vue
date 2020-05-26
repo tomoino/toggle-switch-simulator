@@ -7,7 +7,7 @@
         <VuesaxLogo />
       </header>
       <h1 class="title">
-        Nuxt.js + Vuesax
+        Toggle Switch Simulator
       </h1>
       <h2 class="subtitle">
         <a href="https://vuesax.com/">Vuesax</a> is a framework of ui components for <a href="https://vuejs.org/">Vuejs</a>, It was created to make new interfaces that have a new trend and are visually beautiful
