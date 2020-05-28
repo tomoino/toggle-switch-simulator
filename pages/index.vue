@@ -1,15 +1,10 @@
 <template>
   <div class="container">
     <div>
-      <header class="content-logos">
-        <logo />
-        <span class="plus">+</span>
-        <VuesaxLogo />
-      </header>
       <h1 class="title">
         Toggle Switch Simulator
       </h1>
-      <Graph/>
+      <Graph :values="firstGraphData"/>
     </div>
   </div>
 </template>
@@ -27,14 +22,14 @@ export default {
       let U = [], V = [], T = []
       let [u, v, t] = [u0, v0, t0]
 
-      const [a, n, I1] = [1, 8, 1]
-      const [b, m, I2] = [1, 8, 1]
+      const [a, n] = [1, 8]
+      const [b, m] = [1, 8]
 
       let dudt = (_u, _v) =>  (a / (1 + Math.pow(_v, n))) - _u + I1
       let dvdt = (_u, _v) =>  (b / (1 + Math.pow(_u, m))) - _v + I2
       const dt = (tmax-t0) / division
       
-      for ( let i = 0; i < division; i++) {
+      for ( let i = 0; i <= division; i++) {
         u += dt * dudt(u, v)
         v += dt * dvdt(u, v)
         t += dt
@@ -43,9 +38,28 @@ export default {
         T.push(t)
       }
 
-      return U,V,T; 
+      return {
+        x:T,
+        y:[
+          {
+            label: 'u',
+            backgroundColor: 'rgba(255, 100, 130, 0.2)',
+            data: U
+          },
+          {
+            label: 'v',
+            backgroundColor: 'rgba(100, 130, 255, 0.2)',
+            data: V
+          }
+        ]
+      }
     }
   },
+  computed: {
+    firstGraphData: function() {
+      return this.calcConcentration(0,0,1,1)
+    },
+  }
 }
 </script>
 
