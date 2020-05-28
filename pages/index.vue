@@ -5,6 +5,7 @@
         Toggle Switch Simulator
       </h1>
       <Graph :values="firstGraphData"/>
+      <Graph :values="secondGraphData"/>
     </div>
   </div>
 </template>
@@ -53,11 +54,42 @@ export default {
           }
         ]
       }
+    },
+    calcNullcline ( I1, I2) {
+      const [nullMax, division] = [1.8, 100]
+      let U = [], V = [], t = 0
+
+      const [a, n] = [1, 8]
+      const [b, m] = [1, 8]
+
+      let nullU = (_t) =>  (a / (1 + Math.pow(_t, n))) + I1
+      let nullV = (_t) =>  (b / (1 + Math.pow(_t, m))) + I2
+      const dt = nullMax / division
+      
+      for ( let i = 0; i <= division; i++) {
+        U.push(nullU(t))
+        V.push(nullV(t))
+        t += dt
+      }
+
+      return {
+        x:U,
+        y:[
+          {
+            label: 'v',
+            backgroundColor: 'rgba(100, 130, 255, 0.2)',
+            data: V
+          }
+        ]
+      }
     }
   },
   computed: {
     firstGraphData: function() {
       return this.calcConcentration(0,0,1,1)
+    },
+    secondGraphData: function() {
+      return this.calcNullcline(1,1)
     },
   }
 }
