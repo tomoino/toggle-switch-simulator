@@ -1,16 +1,14 @@
 <template>
-<v-app id="inspire">
     <div class="small">
         <line-chart :chart-data="datacollection"></line-chart>
     </div>
-</v-app>
 </template>
  
 <script>
 export default {
     data () {
       return {
-        datacollection: null,
+        datacollection: {},
       }
     },
     props: {
@@ -21,6 +19,11 @@ export default {
     },
     mounted () {
       this.fillData()
+    },
+    watch: {
+      values: function(){
+        this.fillData();
+      }
     },
     methods: {
       fillData () {

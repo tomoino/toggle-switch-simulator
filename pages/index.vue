@@ -5,6 +5,12 @@
         Toggle Switch Simulator
       </h1>
       <Graph :values="firstGraphData"/>
+      <div>
+        <h3>U0</h3><vs-slider v-model="u0"/>
+        <h3>V0</h3><vs-slider v-model="v0"/>
+        <h3>I1</h3><vs-slider v-model="I1"/>
+        <h3>I2</h3><vs-slider v-model="I2"/>
+      </div>    
       <Graph :values="secondGraphData"/>
     </div>
   </div>
@@ -16,6 +22,14 @@ import Graph from '~/components/Graph.vue'
 export default {
   components: {
     Graph
+  },
+  data () {
+    return {
+      u0: 0,
+      v0: 0,
+      I1: 1,
+      I2: 1,
+    }
   },
   methods: {
     calcConcentration ( u0, v0, I1, I2) {
@@ -87,10 +101,10 @@ export default {
   },
   computed: {
     firstGraphData: function() {
-      return this.calcConcentration(0,0,1,1)
+      return this.calcConcentration(this.u0,this.v0,this.I1,this.I2)
     },
     secondGraphData: function() {
-      return this.calcNullcline(1,1)
+      return this.calcNullcline(this.I1,this.I2)
     },
   }
 }
