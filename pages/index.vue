@@ -56,8 +56,8 @@ export default {
       }
     },
     calcNullcline ( I1, I2) {
-      const [nullMax, division] = [1.8, 100]
-      let U = [], V = [], t = 0
+      const [nullMax, division] = [1.6, 160]
+      let U = [], V = [], T = [], t = 0
 
       const [a, n] = [1, 8]
       const [b, m] = [1, 8]
@@ -69,6 +69,7 @@ export default {
       for ( let i = 0; i <= division; i++) {
         U.push(nullU(t))
         V.push(nullV(t))
+        T.push(t)
         t += dt
       }
 
