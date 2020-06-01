@@ -5,13 +5,13 @@
         Toggle Switch Simulator
       </h1>
       <Graph :values="firstGraphData"/>
+      <Graph :values="secondGraphData"/>
       <div>
         <h3>U0</h3><vs-slider v-model="u0"/>
         <h3>V0</h3><vs-slider v-model="v0"/>
         <h3>I1</h3><vs-slider v-model="I1"/>
         <h3>I2</h3><vs-slider v-model="I2"/>
       </div>    
-      <Graph :values="secondGraphData"/>
     </div>
   </div>
 </template>
@@ -70,30 +70,50 @@ export default {
       }
     },
     calcNullcline ( I1, I2) {
-      const [nullMax, division] = [1.6, 160]
-      let U = [], V = [], T = [], t = 0
+      const [nullMax, division] = [2.0, 160]
+      let U = [], V_of_nullU = [], V_of_nullV = []
 
       const [a, n] = [1, 8]
       const [b, m] = [1, 8]
 
-      let nullU = (_t) =>  (a / (1 + Math.pow(_t, n))) + I1
-      let nullV = (_t) =>  (b / (1 + Math.pow(_t, m))) + I2
-      const dt = nullMax / division
-      
-      for ( let i = 0; i <= division; i++) {
-        U.push(nullU(t))
-        V.push(nullV(t))
-        T.push(t)
-        t += dt
+      let calc_u_of_nullU = (_v) =>  (a / (1 + Math.pow(_v, n))) + I1
+      let calc_v_of_nullU = (_u) =>  Math.pow(a/(_u - I1) - 1, 1/n)
+      let calc_v_of_nullV = (_u) =>  (b / (1 + Math.pow(_u, m))) + I2
+      const du = nullMax / division
+      const dv = nullMax / division
+
+      // for (let u = 0; u <= nullMax; u += du) {
+      //   let v_of_nullU = calc_v_of_nullU(u)
+      //   let v_of_nullV = calc_v_of_nullV(u)
+
+      //   if (v_of_nullU > 2)
+      //     v_of_nullU = null
+
+      //   U.push(u)
+      //   V_of_nullU.push(v_of_nullU)
+      //   V_of_nullV.push(v_of_nullV)
+      // }
+
+      for (let u = 0; u < nullMax; u += du) {
+        let v = calc_v_of_nullV(u)
+        let v_of_nullU = calc_v_of_nullU(u)
+        V_of_nullV.push(v)
+        V_of_nullU.push(v_of_nullU)
+        U.push(u)
       }
 
       return {
         x:U,
         y:[
           {
-            label: 'v',
+            label: 'nullcline dudt=0',
+            backgroundColor: 'rgba(255, 100, 130, 0.2)',
+            data: V_of_nullU
+          },
+          {
+            label: 'nullcline dvdt=0',
             backgroundColor: 'rgba(100, 130, 255, 0.2)',
-            data: V
+            data: V_of_nullV
           }
         ]
       }
