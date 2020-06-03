@@ -70,7 +70,6 @@ export default {
       }
     },
     calcNullcline ( I1, I2) {
-      const [nullMax, division] = [2.0, 200]
       let U = [], V_of_nullU = [], V_of_nullV = []
 
       const [a, n] = [1, 8]
@@ -82,13 +81,11 @@ export default {
       let calc_u_of_nullU = (_v) =>  (a / (1 + Math.pow(_v, n))) + I1
       let calc_v_of_nullU = (_u) =>  Math.pow(a/(_u - I1) - 1, 1/n)
       let calc_v_of_nullV = (_u) =>  (b / (1 + Math.pow(_u, m))) + I2
-      const du = nullMax / division
-      const dv = nullMax / division
+      const du = 0.01
 
-      for (let u = 0; u < nullMax; u += du) {
+      for (let u = 0; u <= nullUMax; u += du) {
         let v = calc_v_of_nullV(u)
         let v_of_nullU = calc_v_of_nullU(u)
-        console.log(u+": v = "+v_of_nullU)
         V_of_nullV.push(v)
         V_of_nullU.push(v_of_nullU)
         U.push(u)
