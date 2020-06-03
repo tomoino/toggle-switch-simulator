@@ -1,6 +1,6 @@
 <template>
     <div class="small">
-        <line-chart :chart-data="datacollection"></line-chart>
+        <line-chart :chart-data="datacollection" :options="values.options"></line-chart>
     </div>
 </template>
  
@@ -8,7 +8,7 @@
 export default {
     data () {
       return {
-        datacollection: {},
+        datacollection: {}
       }
     },
     props: {
