@@ -50,7 +50,7 @@ export default {
         t += dt
         U.push(u)
         V.push(v)
-        T.push(t)
+        T.push(Math.floor(t*100)/100)
       }
 
       return {
@@ -88,7 +88,7 @@ export default {
         let v_of_nullU = calc_v_of_nullU(u)
         V_of_nullV.push(v)
         V_of_nullU.push(v_of_nullU)
-        U.push(u)
+        U.push(Math.floor(u*100)/100)
       }
 
       return {
