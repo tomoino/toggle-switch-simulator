@@ -1,74 +1,142 @@
 <template>
   <div class="container">
     <div>
-      <header class="content-logos">
-        <logo />
-        <span class="plus">+</span>
-        <VuesaxLogo />
-      </header>
       <h1 class="title">
         Toggle Switch Simulator
       </h1>
-      <h2 class="subtitle">
-        <a href="https://vuesax.com/">Vuesax</a> is a framework of ui components for <a href="https://vuejs.org/">Vuejs</a>, It was created to make new interfaces that have a new trend and are visually beautiful
-      </h2>
-      <div class="links">
-        <h3 class="h3">
-          Vuesax
-        </h3>
-        <a
-          href="https://vuesax.com/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://discordapp.com/invite/9dsKtvB"
-          target="_blank"
-          class="button--grey"
-        >
-          Discord
-        </a>
-        <a
-          href="https://github.com/lusaxweb/vuesax"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-      <div class="links">
-        <h3 class="h3">
-          Nuxt.js
-        </h3>
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <Graph :values="firstGraphData"/>
+      <Graph :values="secondGraphData"/>
+      <div>
+        <h3>U0 = {{u0}}</h3><vs-slider v-model="u0"/>
+        <h3>V0 = {{v0}}</h3><vs-slider v-model="v0"/>
+        <h3>I1 = {{I1}}</h3><vs-slider v-model="I1"/>
+        <h3>I2 = {{I2}}</h3><vs-slider v-model="I2"/>
+      </div>    
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuesaxLogo from '~/components/VuesaxLogo.vue'
+import Graph from '~/components/Graph.vue'
 
 export default {
   components: {
-    Logo,
-    VuesaxLogo
+    Graph
+  },
+  data () {
+    return {
+      u0: 0,
+      v0: 0,
+      I1: 1,
+      I2: 1,
+    }
+  },
+  methods: {
+    calcConcentration ( u0, v0, I1, I2) {
+      const [t0, tmax, division] = [0, 30, 100]
+      let U = [], V = [], T = []
+      let [u, v, t] = [u0, v0, t0]
+
+      const [a, n] = [1, 8]
+      const [b, m] = [1, 8]
+
+      let dudt = (_u, _v) =>  (a / (1 + Math.pow(_v, n))) - _u + I1
+      let dvdt = (_u, _v) =>  (b / (1 + Math.pow(_u, m))) - _v + I2
+      const dt = (tmax-t0) / division
+      
+      for ( let i = 0; i <= division; i++) {
+        u += dt * dudt(u, v)
+        v += dt * dvdt(u, v)
+        t += dt
+        U.push(u)
+        V.push(v)
+        T.push(Math.floor(t*100)/100)
+      }
+
+      return {
+        x:T,
+        y:[
+          {
+            label: 'u',
+            backgroundColor: 'rgba(255, 100, 130, 0.2)',
+            data: U
+          },
+          {
+            label: 'v',
+            backgroundColor: 'rgba(100, 130, 255, 0.2)',
+            data: V
+          }
+        ]
+      }
+    },
+    calcNullcline ( I1, I2) {
+      let U = [], V_of_nullU = [], V_of_nullV = []
+
+      const [a, n] = [1, 8]
+      const [b, m] = [1, 8]
+
+      const nullUMax = I1 + a 
+      const nullVMax = I2 + b
+
+      let calc_u_of_nullU = (_v) =>  (a / (1 + Math.pow(_v, n))) + I1
+      let calc_v_of_nullU = (_u) =>  Math.pow(a/(_u - I1) - 1, 1/n)
+      let calc_v_of_nullV = (_u) =>  (b / (1 + Math.pow(_u, m))) + I2
+      const du = 0.01
+
+      for (let u = 0; u <= nullUMax; u += du) {
+        let v = calc_v_of_nullV(u)
+        let v_of_nullU = calc_v_of_nullU(u)
+        V_of_nullV.push(v)
+        V_of_nullU.push(v_of_nullU)
+        U.push(Math.floor(u*100)/100)
+      }
+
+      return {
+        x:U,
+        y:[
+          {
+            label: 'nullcline dudt=0',
+            backgroundColor: 'rgba(255, 100, 130, 0.2)',
+            data: V_of_nullU
+          },
+          {
+            label: 'nullcline dvdt=0',
+            backgroundColor: 'rgba(100, 130, 255, 0.2)',
+            data: V_of_nullV
+          }
+        ],
+        options: {
+          scales: {
+            xAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: nullUMax
+                }
+              }
+            ],
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: nullVMax
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  computed: {
+    firstGraphData: function() {
+      return this.calcConcentration(this.u0,this.v0,this.I1,this.I2)
+    },
+    secondGraphData: function() {
+      return this.calcNullcline(this.I1,this.I2)
+    },
   }
 }
 </script>
