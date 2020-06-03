@@ -7,10 +7,10 @@
       <Graph :values="firstGraphData"/>
       <Graph :values="secondGraphData"/>
       <div>
-        <h3>U0</h3><vs-slider v-model="u0"/>
-        <h3>V0</h3><vs-slider v-model="v0"/>
-        <h3>I1</h3><vs-slider v-model="I1"/>
-        <h3>I2</h3><vs-slider v-model="I2"/>
+        <h3>U0 = {{u0}}</h3><vs-slider v-model="u0"/>
+        <h3>V0 = {{v0}}</h3><vs-slider v-model="v0"/>
+        <h3>I1 = {{I1}}</h3><vs-slider v-model="I1"/>
+        <h3>I2 = {{I2}}</h3><vs-slider v-model="I2"/>
       </div>    
     </div>
   </div>
