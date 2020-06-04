@@ -17,17 +17,20 @@
         <h3>V0 = {{Math.floor(v0*100)/100}}</h3><vs-slider v-model="v0Slider"/>
         <h3>I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
         <h3>I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
-      </div>    
+      </div>
+      <Schale :value="stableU/3"/>    
     </div>
   </div>
 </template>
 
 <script>
 import Graph from '~/components/Graph.vue'
+import Schale from '~/components/Schale.vue'
 
 export default {
   components: {
-    Graph
+    Graph,
+    Schale
   },
   data () {
     return {
@@ -35,6 +38,7 @@ export default {
       v0Slider: 0,
       I1Slider: 100,
       I2Slider: 100,
+      stableU: 0,
     }
   },
   methods: {
@@ -52,12 +56,14 @@ export default {
       
       for ( let i = 0; i <= division; i++) {
         u += dt * dudt(u, v)
+        this.stableU = u
         v += dt * dvdt(u, v)
         t += dt
         U.push(u)
         V.push(v)
         T.push(Math.floor(t*100)/100)
       }
+
 
       return {
         x:T,
