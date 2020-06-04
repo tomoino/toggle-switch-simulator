@@ -17,17 +17,20 @@
         <h3>V0 = {{Math.floor(v0*100)/100}}</h3><vs-slider v-model="v0Slider"/>
         <h3>I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
         <h3>I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
-      </div>    
+      </div>
+      <Schale />    
     </div>
   </div>
 </template>
 
 <script>
 import Graph from '~/components/Graph.vue'
+import Schale from '~/components/Schale.vue'
 
 export default {
   components: {
-    Graph
+    Graph,
+    Schale
   },
   data () {
     return {
