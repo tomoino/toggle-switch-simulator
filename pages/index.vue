@@ -18,7 +18,7 @@
         <h3>I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
         <h3>I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
       </div>
-      <Schale />    
+      <Schale :value="u0Slider/100"/>    
     </div>
   </div>
 </template>
