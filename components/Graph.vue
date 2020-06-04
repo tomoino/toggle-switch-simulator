@@ -1,5 +1,5 @@
 <template>
-    <div class="small">
+    <div style="margin-bottom: 50px">
         <line-chart :chart-data="datacollection" :options="values.options"></line-chart>
     </div>
 </template>

@@ -4,13 +4,19 @@
       <h1 class="title">
         Toggle Switch Simulator
       </h1>
-      <Graph :values="firstGraphData"/>
-      <Graph :values="secondGraphData"/>
+      <vs-row>
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="6">
+          <Graph :values="firstGraphData"/>
+        </vs-col>
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="6">
+          <Graph :values="secondGraphData"/>
+        </vs-col> 
+      </vs-row>
       <div>
-        <h3>U0 = {{u0}}</h3><vs-slider v-model="u0"/>
-        <h3>V0 = {{v0}}</h3><vs-slider v-model="v0"/>
-        <h3>I1 = {{I1}}</h3><vs-slider v-model="I1"/>
-        <h3>I2 = {{I2}}</h3><vs-slider v-model="I2"/>
+        <h3>U0 = {{Math.floor(u0*100)/100}}</h3><vs-slider v-model="u0Slider"/>
+        <h3>V0 = {{Math.floor(v0*100)/100}}</h3><vs-slider v-model="v0Slider"/>
+        <h3>I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
+        <h3>I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
       </div>    
     </div>
   </div>
@@ -25,10 +31,10 @@ export default {
   },
   data () {
     return {
-      u0: 0,
-      v0: 0,
-      I1: 1,
-      I2: 1,
+      u0Slider: 0,
+      v0Slider: 0,
+      I1Slider: 100,
+      I2Slider: 100,
     }
   },
   methods: {
@@ -136,6 +142,18 @@ export default {
     },
     secondGraphData: function() {
       return this.calcNullcline(this.I1,this.I2)
+    },
+    u0: function(){
+      return this.u0Slider*0.01
+    },
+    v0: function(){
+      return this.v0Slider*0.01
+    },
+    I1: function(){
+      return this.I1Slider*0.01
+    },
+    I2: function(){
+      return this.I2Slider*0.01
     },
   }
 }
