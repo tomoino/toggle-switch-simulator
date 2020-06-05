@@ -1,6 +1,6 @@
 <template>
-    <div style="margin-bottom: 50px">
-        <line-chart :chart-data="datacollection" :options="values.options"></line-chart>
+    <div style="margin-bottom: 50px;">
+        <line-chart style="width: 95%;" :chart-data="datacollection" :options="values.options"></line-chart>
     </div>
 </template>
  

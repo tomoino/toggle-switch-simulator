@@ -1,5 +1,5 @@
 <template>
-    <div style="margin-top: 200px; display: inline-block; height:600px;">
+    <div style="margin-top: 50px; display: inline-block; width:80%;">
         <!-- <SchaleSVG transform="scale(5,5)"/> -->
     <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -8,12 +8,10 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    viewBox="0 0 108.24 67.493332"
-   height="67.493332"
-   width="108.24"
+   width="100%"
    xml:space="preserve"
    id="svg2"
    version="1.1"
-   transform="scale(5,5)"
    ><metadata
      id="metadata8"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
