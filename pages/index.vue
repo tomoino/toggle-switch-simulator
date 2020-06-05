@@ -5,20 +5,28 @@
         Toggle Switch Simulator
       </h1>
       <vs-row>
-        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="6">
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
           <Graph :values="firstGraphData"/>
         </vs-col>
-        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="6">
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
           <Graph :values="secondGraphData"/>
         </vs-col> 
       </vs-row>
-      <div>
-        <h3>U0 = {{Math.floor(u0*100)/100}}</h3><vs-slider v-model="u0Slider"/>
-        <h3>V0 = {{Math.floor(v0*100)/100}}</h3><vs-slider v-model="v0Slider"/>
-        <h3>I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
-        <h3>I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
-      </div>
-      <Schale :value="stableU/3"/>    
+      <vs-row>
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
+          <div style="margin:auto 50px;text-align: center;">
+            <h3>U0 = {{Math.floor(u0*100)/100}}</h3><vs-slider v-model="u0Slider"/>
+            <h3>V0 = {{Math.floor(v0*100)/100}}</h3><vs-slider v-model="v0Slider"/>
+            <h3>I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
+            <h3>I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
+          </div>
+        </vs-col>
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
+          <Schale :value="stableU/3"/>    
+        </vs-col> 
+      </vs-row>
+
+      
     </div>
   </div>
 </template>
@@ -168,7 +176,6 @@ export default {
 <style>
 .container {
   margin: 0 auto;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -180,47 +187,11 @@ export default {
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: block;
   font-weight: 300;
-  font-size: 55px;
+  font-size: 40px;
   color: #35495e;
   letter-spacing: 1px;
   text-transform: capitalize;
   margin: 25px 0px
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 1.1rem;
-  color: #526488;
-  word-spacing: 2px;
-  padding-bottom: 15px;
-  max-width: 600px;
-}
-
-.subtitle a {
-  font-weight: 500;
-  color: inherit
-}
-
-.links {
-  padding-top: 15px;
-  margin-bottom: 20px
-}
-
-.content-logos {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 500px;
-}
-.plus {
-  font-size: 2.5rem;
-  margin: 15px;
-  color: #35495e
-}
-.h3 {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 400;
-  margin: 10px;
-}
 </style>
