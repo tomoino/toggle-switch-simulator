@@ -90,7 +90,41 @@ export default {
             backgroundColor: 'rgba(100, 130, 255, 0.2)',
             data: V
           }
-        ]
+        ],
+        options: {
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true, 
+                  labelString: "t"
+                },
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 30
+                }
+              }
+            ],
+            yAxes: [
+              {   
+                scaleLabel: {
+                  display: true, 
+                  labelString: "u, v"
+                },
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                }
+              }
+            ]
+          },
+          title: {
+              display: true,
+              position: "bottom",
+              text: 'u,v-tグラフ'
+          }
+        }
       }
     },
     calcNullcline ( I1, I2, a, b) {
@@ -133,6 +167,10 @@ export default {
           scales: {
             xAxes: [
               {
+                scaleLabel: {
+                  display: true, 
+                  labelString: "u"
+                },
                 ticks: {
                   beginAtZero: true,
                   min: 0,
@@ -141,7 +179,11 @@ export default {
               }
             ],
             yAxes: [
-              {
+              {   
+                scaleLabel: {
+                  display: true, 
+                  labelString: "v"
+                },
                 ticks: {
                   beginAtZero: true,
                   min: 0,
@@ -149,6 +191,11 @@ export default {
                 }
               }
             ]
+          },
+          title: {
+              display: true,
+              position: "bottom",
+              text: 'ヌルクライン'
           }
         }
       }
