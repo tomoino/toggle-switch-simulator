@@ -76,7 +76,7 @@ export default {
         t += dt
         U.push(u)
         V.push(v)
-        T.push(Math.floor(t*100)/100)
+        T.push(Math.round(t*100)/100)
       }
 
 
@@ -109,7 +109,8 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: 30
+                  max: 30,
+                  maxTicksLimit:10
                 }
               }
             ],
@@ -148,12 +149,12 @@ export default {
       let calc_v_of_nullV = (_u) =>  (b / (1 + Math.pow(_u, m))) + I2
       const du = 0.01
 
-      for (let u = 0; u <= 4+du; u += du) {
+      for (let u = 0; u <= 4; u += du) {
         let v = calc_v_of_nullV(u)
         let v_of_nullU = calc_v_of_nullU(u)
         V_of_nullV.push(v)
         V_of_nullU.push(v_of_nullU)
-        U.push(Math.floor(u*100)/100)
+        U.push(Math.round(u*100)/100)
       }
 
       return {
@@ -185,7 +186,8 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: 4
+                  max: 4,
+                  maxTicksLimit:10
                 }
               }
             ],
