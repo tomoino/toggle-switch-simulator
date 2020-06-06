@@ -148,7 +148,7 @@ export default {
       let calc_v_of_nullV = (_u) =>  (b / (1 + Math.pow(_u, m))) + I2
       const du = 0.01
 
-      for (let u = 0; u <= nullUMax + 1; u += du) {
+      for (let u = 0; u <= 4+du; u += du) {
         let v = calc_v_of_nullV(u)
         let v_of_nullU = calc_v_of_nullU(u)
         V_of_nullV.push(v)
@@ -198,7 +198,7 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: 5
+                  max: 4
                 }
               }
             ]
