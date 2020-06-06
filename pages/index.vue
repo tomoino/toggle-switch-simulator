@@ -141,11 +141,11 @@ export default {
       let nullVMax = I2 + b
 
       let calc_u_of_nullU = (_v) =>  (a / (1 + Math.pow(_v, n))) + I1
-      let calc_v_of_nullU = (_u) =>  _u - I1 == 0 ? 100 : Math.pow(a/(_u - I1) - 1, 1/n)
+      let calc_v_of_nullU = (_u) =>  _u - I1 == 0 ? 100 : (_u >= nullUMax ? -1 : Math.pow(a/(_u - I1) - 1, 1/n))
       let calc_v_of_nullV = (_u) =>  (b / (1 + Math.pow(_u, m))) + I2
       const du = 0.01
 
-      for (let u = 0; u <= nullUMax; u += du) {
+      for (let u = 0; u <= nullUMax + 1; u += du) {
         let v = calc_v_of_nullV(u)
         let v_of_nullU = calc_v_of_nullU(u)
         V_of_nullV.push(v)
@@ -182,7 +182,7 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: 3
+                  max: 4
                 }
               }
             ],
@@ -195,7 +195,7 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: 3
+                  max: 5
                 }
               }
             ]
