@@ -316,7 +316,7 @@ export default {
   },
   computed: {
     cellColor: function () {
-      return this.rgb2hex([0,255,0])//"#00ffff"
+      return this.rgb2hex([0,255,0])
     },
     cellOpacity: function() {
         return this.value*0.9 + 0.1

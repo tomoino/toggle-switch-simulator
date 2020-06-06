@@ -13,7 +13,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
   },
   /*
   ** Customize the progress-bar color
@@ -31,6 +31,7 @@ export default {
   plugins: [
     '@/plugins/vuesax',
     '@/plugins/line-chart',
+    "~/plugins/katex"
   ],
   /*
   ** Nuxt.js dev-modules
@@ -41,7 +42,19 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/markdownit'
   ],
+  markdownit: {
+    preset: "default",
+    html: true,
+    linkify: true,
+    breaks: true,
+    typographer: true,
+    injected: true,
+    use: [
+      "markdown-it-katex",
+    ]
+  },
   /*
   ** Build configuration
   */

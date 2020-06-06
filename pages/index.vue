@@ -4,6 +4,7 @@
       <h1 class="title">
         Toggle Switch Simulator
       </h1>
+      <Equation />
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
           <Graph :values="firstGraphData"/>
@@ -15,12 +16,13 @@
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
           <div style="margin:auto 50px;text-align: center;">
-            <h3>U0 = {{Math.floor(u0*100)/100}}</h3><vs-slider v-model="u0Slider"/>
-            <h3>V0 = {{Math.floor(v0*100)/100}}</h3><vs-slider v-model="v0Slider"/>
-            <h3>I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
-            <h3>I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
-            <h3>α1 = {{Math.floor(a*100)/100}}</h3><vs-slider v-model="aSlider"/>
-            <h3>α2 = {{Math.floor(b*100)/100}}</h3><vs-slider v-model="bSlider"/>
+            <h3 style="margin-bottom:-12px;">u0 = {{Math.floor(u0*100)/100}}</h3><vs-slider v-model="u0Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">v0 = {{Math.floor(v0*100)/100}}</h3><vs-slider v-model="v0Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">α1 = {{Math.floor(a*100)/100}}</h3><vs-slider :max="200" v-model="aSlider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">α2 = {{Math.floor(b*100)/100}}</h3><vs-slider :max="200" v-model="bSlider"/>
+            <h3 style="margin-top:25px;">β = 8, γ = 8</h3>
           </div>
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
@@ -34,11 +36,13 @@
 </template>
 
 <script>
+import Equation from '~/components/Equation.vue'
 import Graph from '~/components/Graph.vue'
 import Schale from '~/components/Schale.vue'
 
 export default {
   components: {
+    Equation,
     Graph,
     Schale
   },
@@ -56,7 +60,7 @@ export default {
   methods: {
     calcConcentration ( u0, v0, I1, I2, a, b) {
       const [t0, tmax, division] = [0, 30, 100]
-      let U = [], V = [], T = []
+      let U = [u0], V = [v0], T = [t0]
       let [u, v, t] = [u0, v0, t0]
 
       const n = 8
@@ -73,7 +77,7 @@ export default {
         t += dt
         U.push(u)
         V.push(v)
-        T.push(Math.floor(t*100)/100)
+        T.push(Math.round(t*100)/100)
       }
 
 
@@ -106,7 +110,8 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: 30
+                  max: 30,
+                  maxTicksLimit:10
                 }
               }
             ],
@@ -141,16 +146,16 @@ export default {
       let nullVMax = I2 + b
 
       let calc_u_of_nullU = (_v) =>  (a / (1 + Math.pow(_v, n))) + I1
-      let calc_v_of_nullU = (_u) =>  Math.pow(a/(_u - I1) - 1, 1/n)
+      let calc_v_of_nullU = (_u) =>  _u - I1 == 0 ? 100 : (_u >= nullUMax ? -1 : Math.pow(a/(_u - I1) - 1, 1/n))
       let calc_v_of_nullV = (_u) =>  (b / (1 + Math.pow(_u, m))) + I2
       const du = 0.01
 
-      for (let u = 0; u <= nullUMax; u += du) {
+      for (let u = 0; u <= 4; u += du) {
         let v = calc_v_of_nullV(u)
         let v_of_nullU = calc_v_of_nullU(u)
         V_of_nullV.push(v)
         V_of_nullU.push(v_of_nullU)
-        U.push(Math.floor(u*100)/100)
+        U.push(Math.round(u*100)/100)
       }
 
       return {
@@ -182,7 +187,8 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: 3
+                  max: 4,
+                  maxTicksLimit:10
                 }
               }
             ],
@@ -195,7 +201,7 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: 3
+                  max: 4
                 }
               }
             ]

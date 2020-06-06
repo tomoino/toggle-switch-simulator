@@ -11,7 +11,10 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/markdownit": "^1.2.9",
     "chart.js": "^2.9.3",
+    "markdown-it": "^11.0.0",
+    "markdown-it-katex": "^2.0.3",
     "nuxt": "^2.0.0",
     "vue-chartjs": "^3.5.0",
     "vuesax": "^3.11.15"
