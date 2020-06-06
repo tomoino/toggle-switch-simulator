@@ -101,7 +101,7 @@ export default {
               {
                 scaleLabel: {
                   display: true, 
-                  labelString: "t"
+                  labelString: "時間 t"
                 },
                 ticks: {
                   beginAtZero: true,
@@ -114,7 +114,7 @@ export default {
               {   
                 scaleLabel: {
                   display: true, 
-                  labelString: "u, v"
+                  labelString: "転写因子濃度 u, v"
                 },
                 ticks: {
                   beginAtZero: true,
@@ -126,7 +126,7 @@ export default {
           title: {
               display: true,
               position: "bottom",
-              text: 'fig1. u,v - t'
+              text: '転写因子濃度の時間変化'
           }
         }
       }
@@ -177,7 +177,7 @@ export default {
               {
                 scaleLabel: {
                   display: true, 
-                  labelString: "u"
+                  labelString: "転写因子濃度 u"
                 },
                 ticks: {
                   beginAtZero: true,
@@ -190,7 +190,7 @@ export default {
               {   
                 scaleLabel: {
                   display: true, 
-                  labelString: "v"
+                  labelString: "転写因子濃度 v"
                 },
                 ticks: {
                   beginAtZero: true,
@@ -203,7 +203,7 @@ export default {
           title: {
               display: true,
               position: "bottom",
-              text: 'fig2. Nullcline'
+              text: '転写因子濃度のヌルクライン'
           }
         }
       }
