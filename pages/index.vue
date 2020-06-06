@@ -16,12 +16,12 @@
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
           <div style="margin:auto 50px;text-align: center;">
-            <h3 style="margin-bottom:-12px;">u0 = {{Math.floor(u0*100)/100}}</h3><vs-slider v-model="u0Slider"/>
-            <h3 style="margin-bottom:-12px;margin-top:25px;">v0 = {{Math.floor(v0*100)/100}}</h3><vs-slider v-model="v0Slider"/>
-            <h3 style="margin-bottom:-12px;margin-top:25px;">I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
-            <h3 style="margin-bottom:-12px;margin-top:25px;">I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
-            <h3 style="margin-bottom:-12px;margin-top:25px;">α1 = {{Math.floor(a*100)/100}}</h3><vs-slider :max="200" v-model="aSlider"/>
-            <h3 style="margin-bottom:-12px;margin-top:25px;">α2 = {{Math.floor(b*100)/100}}</h3><vs-slider :max="200" v-model="bSlider"/>
+            <h3 style="margin-bottom:-12px;">u0 = {{Math.floor(u0*100)/100}}</h3><vs-slider :max="U0_MAX*100" v-model="u0Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">v0 = {{Math.floor(v0*100)/100}}</h3><vs-slider :max="V0_MAX*100"  v-model="v0Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="I1_MAX*100" v-model="I1Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="I2_MAX*100" v-model="I2Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">α1 = {{Math.floor(a*100)/100}}</h3><vs-slider :max="ALPHA1_MAX*100" v-model="aSlider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">α2 = {{Math.floor(b*100)/100}}</h3><vs-slider :max="ALPHA2_MAX*100" v-model="bSlider"/>
             <h3 style="margin-top:25px;">β = 8, γ = 8</h3>
           </div>
         </vs-col>
@@ -48,6 +48,12 @@ export default {
   },
   data () {
     return {
+      U0_MAX: 2,
+      V0_MAX: 2,
+      I1_MAX: 2,
+      I2_MAX: 2,
+      ALPHA1_MAX: 2,
+      ALPHA2_MAX: 2,
       u0Slider: 0,
       v0Slider: 0,
       I1Slider: 0,
@@ -141,6 +147,8 @@ export default {
 
       const n = 8
       const m = 8
+      const U_MAX = 3
+      const V_MAX = 3
 
       let nullUMax = I1 + a
       let nullVMax = I2 + b
@@ -150,7 +158,7 @@ export default {
       let calc_v_of_nullV = (_u) =>  (b / (1 + Math.pow(_u, m))) + I2
       const du = 0.01
 
-      for (let u = 0; u <= 4; u += du) {
+      for (let u = 0; u <= U_MAX; u += du) {
         let v = calc_v_of_nullV(u)
         let v_of_nullU = calc_v_of_nullU(u)
         V_of_nullV.push(v)
@@ -187,7 +195,7 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: 4,
+                  max: U_MAX,
                   maxTicksLimit:10
                 }
               }
@@ -201,7 +209,7 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: 4
+                  max: V_MAX
                 }
               }
             ]
