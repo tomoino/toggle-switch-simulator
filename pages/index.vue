@@ -141,7 +141,7 @@ export default {
       let nullVMax = I2 + b
 
       let calc_u_of_nullU = (_v) =>  (a / (1 + Math.pow(_v, n))) + I1
-      let calc_v_of_nullU = (_u) =>  Math.pow(a/(_u - I1) - 1, 1/n)
+      let calc_v_of_nullU = (_u) =>  _u - I1 == 0 ? 100 : Math.pow(a/(_u - I1) - 1, 1/n)
       let calc_v_of_nullV = (_u) =>  (b / (1 + Math.pow(_u, m))) + I2
       const du = 0.01
 
