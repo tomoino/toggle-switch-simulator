@@ -82,12 +82,16 @@ export default {
         y:[
           {
             label: 'u',
-            backgroundColor: 'rgba(255, 100, 130, 0.2)',
+            borderColor: 'rgba(255, 100, 130, 0.5)',
+            fill: false,
+            pointRadius: 0,
             data: U
           },
           {
             label: 'v',
-            backgroundColor: 'rgba(100, 130, 255, 0.2)',
+            borderColor: 'rgba(100, 130, 255, 0.5)',
+            fill: false,
+            pointRadius: 0,
             data: V
           }
         ],
@@ -154,12 +158,16 @@ export default {
         y:[
           {
             label: 'nullcline dudt=0',
-            backgroundColor: 'rgba(255, 100, 130, 0.2)',
+            borderColor: 'rgba(255, 100, 130, 0.5)',
+            fill: false,
+            pointRadius: 0,
             data: V_of_nullU
           },
           {
             label: 'nullcline dvdt=0',
-            backgroundColor: 'rgba(100, 130, 255, 0.2)',
+            borderColor: 'rgba(100, 130, 255, 0.5)',
+            fill: false,
+            pointRadius: 0,
             data: V_of_nullV
           }
         ],
