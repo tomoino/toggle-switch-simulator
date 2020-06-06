@@ -16,12 +16,13 @@
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
           <div style="margin:auto 50px;text-align: center;">
-            <h3>U0 = {{Math.floor(u0*100)/100}}</h3><vs-slider v-model="u0Slider"/>
-            <h3>V0 = {{Math.floor(v0*100)/100}}</h3><vs-slider v-model="v0Slider"/>
-            <h3>I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
-            <h3>I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
-            <h3>α1 = {{Math.floor(a*100)/100}}</h3><vs-slider :max="200" v-model="aSlider"/>
-            <h3>α2 = {{Math.floor(b*100)/100}}</h3><vs-slider :max="200" v-model="bSlider"/>
+            <h3 style="margin-bottom:-12px;">u0 = {{Math.floor(u0*100)/100}}</h3><vs-slider v-model="u0Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">v0 = {{Math.floor(v0*100)/100}}</h3><vs-slider v-model="v0Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">α1 = {{Math.floor(a*100)/100}}</h3><vs-slider :max="200" v-model="aSlider"/>
+            <h3 style="margin-bottom:-12px;margin-top:25px;">α2 = {{Math.floor(b*100)/100}}</h3><vs-slider :max="200" v-model="bSlider"/>
+            <h3 style="margin-top:25px;">β = 8, γ = 8</h3>
           </div>
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
