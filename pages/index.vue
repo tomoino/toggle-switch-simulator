@@ -56,7 +56,7 @@ export default {
   methods: {
     calcConcentration ( u0, v0, I1, I2, a, b) {
       const [t0, tmax, division] = [0, 30, 100]
-      let U = [], V = [], T = []
+      let U = [u0], V = [v0], T = [t0]
       let [u, v, t] = [u0, v0, t0]
 
       const n = 8
