@@ -19,6 +19,8 @@
             <h3>V0 = {{Math.floor(v0*100)/100}}</h3><vs-slider v-model="v0Slider"/>
             <h3>I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="200" v-model="I1Slider"/>
             <h3>I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="200" v-model="I2Slider"/>
+            <h3>α1 = {{Math.floor(a*100)/100}}</h3><vs-slider v-model="aSlider"/>
+            <h3>α2 = {{Math.floor(b*100)/100}}</h3><vs-slider v-model="bSlider"/>
           </div>
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
@@ -46,17 +48,19 @@ export default {
       v0Slider: 0,
       I1Slider: 100,
       I2Slider: 100,
+      aSlider: 100,
+      bSlider: 100,
       stableU: 0,
     }
   },
   methods: {
-    calcConcentration ( u0, v0, I1, I2) {
+    calcConcentration ( u0, v0, I1, I2, a, b) {
       const [t0, tmax, division] = [0, 30, 100]
       let U = [], V = [], T = []
       let [u, v, t] = [u0, v0, t0]
 
-      const [a, n] = [1, 8]
-      const [b, m] = [1, 8]
+      const n = 8
+      const m = 8
 
       let dudt = (_u, _v) =>  (a / (1 + Math.pow(_v, n))) - _u + I1
       let dvdt = (_u, _v) =>  (b / (1 + Math.pow(_u, m))) - _v + I2
@@ -78,25 +82,63 @@ export default {
         y:[
           {
             label: 'u',
-            backgroundColor: 'rgba(255, 100, 130, 0.2)',
+            borderColor: 'rgba(255, 100, 130, 0.5)',
+            fill: false,
+            pointRadius: 0,
             data: U
           },
           {
             label: 'v',
-            backgroundColor: 'rgba(100, 130, 255, 0.2)',
+            borderColor: 'rgba(100, 130, 255, 0.5)',
+            fill: false,
+            pointRadius: 0,
             data: V
           }
-        ]
+        ],
+        options: {
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true, 
+                  labelString: "t"
+                },
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  max: 30
+                }
+              }
+            ],
+            yAxes: [
+              {   
+                scaleLabel: {
+                  display: true, 
+                  labelString: "u, v"
+                },
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                }
+              }
+            ]
+          },
+          title: {
+              display: true,
+              position: "bottom",
+              text: 'fig1. u,v - t'
+          }
+        }
       }
     },
-    calcNullcline ( I1, I2) {
+    calcNullcline ( I1, I2, a, b) {
       let U = [], V_of_nullU = [], V_of_nullV = []
 
-      const [a, n] = [1, 8]
-      const [b, m] = [1, 8]
+      const n = 8
+      const m = 8
 
-      const nullUMax = I1 + a 
-      const nullVMax = I2 + b
+      let nullUMax = I1 + a
+      let nullVMax = I2 + b
 
       let calc_u_of_nullU = (_v) =>  (a / (1 + Math.pow(_v, n))) + I1
       let calc_v_of_nullU = (_u) =>  Math.pow(a/(_u - I1) - 1, 1/n)
@@ -115,13 +157,17 @@ export default {
         x:U,
         y:[
           {
-            label: 'nullcline dudt=0',
-            backgroundColor: 'rgba(255, 100, 130, 0.2)',
+            label: 'du/dt=0',
+            borderColor: 'rgba(255, 100, 130, 0.5)',
+            fill: false,
+            pointRadius: 0,
             data: V_of_nullU
           },
           {
-            label: 'nullcline dvdt=0',
-            backgroundColor: 'rgba(100, 130, 255, 0.2)',
+            label: 'dv/dt=0',
+            borderColor: 'rgba(100, 130, 255, 0.5)',
+            fill: false,
+            pointRadius: 0,
             data: V_of_nullV
           }
         ],
@@ -129,22 +175,35 @@ export default {
           scales: {
             xAxes: [
               {
+                scaleLabel: {
+                  display: true, 
+                  labelString: "u"
+                },
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: nullUMax
+                  max: 3
                 }
               }
             ],
             yAxes: [
-              {
+              {   
+                scaleLabel: {
+                  display: true, 
+                  labelString: "v"
+                },
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: nullVMax
+                  max: 3
                 }
               }
             ]
+          },
+          title: {
+              display: true,
+              position: "bottom",
+              text: 'fig2. Nullcline'
           }
         }
       }
@@ -152,10 +211,10 @@ export default {
   },
   computed: {
     firstGraphData: function() {
-      return this.calcConcentration(this.u0,this.v0,this.I1,this.I2)
+      return this.calcConcentration(this.u0,this.v0,this.I1,this.I2,this.a,this.b)
     },
     secondGraphData: function() {
-      return this.calcNullcline(this.I1,this.I2)
+      return this.calcNullcline(this.I1,this.I2,this.a,this.b)
     },
     u0: function(){
       return this.u0Slider*0.01
@@ -168,6 +227,12 @@ export default {
     },
     I2: function(){
       return this.I2Slider*0.01
+    },
+    a: function(){
+      return this.aSlider*0.01
+    },
+    b: function(){
+      return this.bSlider*0.01
     },
   }
 }
