@@ -46,8 +46,8 @@ export default {
     return {
       u0Slider: 0,
       v0Slider: 0,
-      I1Slider: 100,
-      I2Slider: 100,
+      I1Slider: 0,
+      I2Slider: 0,
       aSlider: 100,
       bSlider: 100,
       stableU: 0,
