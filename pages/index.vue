@@ -126,7 +126,7 @@ export default {
           title: {
               display: true,
               position: "bottom",
-              text: 'u,v-tグラフ'
+              text: 'fig1. u,v - t'
           }
         }
       }
@@ -137,8 +137,8 @@ export default {
       const n = 8
       const m = 8
 
-      const nullUMax = I1 + a 
-      const nullVMax = I2 + b
+      let nullUMax = I1 + a
+      let nullVMax = I2 + b
 
       let calc_u_of_nullU = (_v) =>  (a / (1 + Math.pow(_v, n))) + I1
       let calc_v_of_nullU = (_u) =>  Math.pow(a/(_u - I1) - 1, 1/n)
@@ -157,14 +157,14 @@ export default {
         x:U,
         y:[
           {
-            label: 'nullcline dudt=0',
+            label: 'du/dt=0',
             borderColor: 'rgba(255, 100, 130, 0.5)',
             fill: false,
             pointRadius: 0,
             data: V_of_nullU
           },
           {
-            label: 'nullcline dvdt=0',
+            label: 'dv/dt=0',
             borderColor: 'rgba(100, 130, 255, 0.5)',
             fill: false,
             pointRadius: 0,
@@ -182,7 +182,7 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: nullUMax
+                  max: 3
                 }
               }
             ],
@@ -195,7 +195,7 @@ export default {
                 ticks: {
                   beginAtZero: true,
                   min: 0,
-                  max: nullVMax
+                  max: 3
                 }
               }
             ]
@@ -203,7 +203,7 @@ export default {
           title: {
               display: true,
               position: "bottom",
-              text: 'ヌルクライン'
+              text: 'fig2. Nullcline'
           }
         }
       }
