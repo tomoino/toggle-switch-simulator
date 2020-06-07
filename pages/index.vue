@@ -99,6 +99,7 @@ export default {
         y:[
           {
             label: 'u',
+            pointBackgroundColor: 'rgba(255, 100, 130,  0.5)',
             borderColor: 'rgba(255, 100, 130, 0.5)',
             fill: false,
             pointRadius: 0,
@@ -106,6 +107,7 @@ export default {
           },
           {
             label: 'v',
+            pointBackgroundColor: 'rgba(100, 130, 255,  0.5)',
             borderColor: 'rgba(100, 130, 255, 0.5)',
             fill: false,
             pointRadius: 0,
@@ -145,6 +147,11 @@ export default {
               display: true,
               position: "bottom",
               text: '転写因子濃度の時間変化'
+          },
+          legend: {
+            labels: {
+              usePointStyle: true
+            }
           }
         }
       }
@@ -197,6 +204,7 @@ export default {
         y:[
           {
             label: 'du/dt=0',
+            pointBackgroundColor: 'rgba(255, 100, 130,  0.5)',
             borderColor: 'rgba(255, 100, 130, 0.5)',
             fill: false,
             pointRadius: 0,
@@ -204,6 +212,7 @@ export default {
           },
           {
             label: 'dv/dt=0',
+            pointBackgroundColor: 'rgba(100, 130, 255,  0.5)',
             borderColor: 'rgba(100, 130, 255, 0.5)',
             fill: false,
             pointRadius: 0,
@@ -260,6 +269,11 @@ export default {
               display: true,
               position: "bottom",
               text: '転写因子濃度のヌルクライン'
+          },
+          legend: {
+            labels: {
+              usePointStyle: true
+            }
           }
         }
       }
