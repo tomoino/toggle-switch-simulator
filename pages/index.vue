@@ -61,6 +61,8 @@ export default {
       aSlider: 100,
       bSlider: 100,
       stableU: 0,
+      uLast: 0,
+      vLast: 0
     }
   },
   methods: {
@@ -84,6 +86,11 @@ export default {
         U.push(u)
         V.push(v)
         T.push(Math.round(t*100)/100)
+
+        if (i == division) {
+          this.uLast = u
+          this.vLast = v
+        }
       }
 
 
@@ -166,6 +173,25 @@ export default {
         U.push(Math.round(u*100)/100)
       }
 
+      let init = Array(U.length).fill(NaN)
+      let last = Array(U.length).fill(NaN)
+      // 初期値の近似値と最終値の近似値のインデックス 
+      let initApproIndex = 0
+      let lastApproIndex = 0
+      
+      for (let i = 0; i < U.length; i++) {
+        if (Math.abs(U[i] - this.u0) < Math.abs(U[initApproIndex] - this.u0)) {
+          initApproIndex = i
+        }
+
+        if (Math.abs(U[i] - this.uLast) < Math.abs(U[lastApproIndex] - this.uLast)) {
+          lastApproIndex = i
+        }
+      }
+
+      init[initApproIndex] = this.v0
+      last[lastApproIndex] = this.vLast
+
       return {
         x:U,
         y:[
@@ -182,6 +208,22 @@ export default {
             fill: false,
             pointRadius: 0,
             data: V_of_nullV
+          },
+          {
+            label: '初期濃度',
+            pointBackgroundColor: 'rgba(255, 100, 100,  0.8)',
+            borderColor: 'rgba(255, 100, 100,  0.8)',
+            fill: false,
+            pointRadius: 5,
+            data: init
+          },
+          {
+            label: '最終濃度',
+            pointBackgroundColor: 'rgba(100, 100, 255,  0.8)',
+            borderColor: 'rgba(100, 100, 255, 0.8)',
+            fill: false,
+            pointRadius: 5,
+            data: last
           }
         ],
         options: {
