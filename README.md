@@ -1,6 +1,5 @@
 # toggle-switch-simulator
-
-> My rad Nuxt.js project
+https://toggle-switch-simulator.netlify.app/
 
 ## Build Setup
 
