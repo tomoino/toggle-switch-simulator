@@ -4,6 +4,7 @@
       <h1 class="title">
         Toggle Switch Simulator
       </h1>
+      <Figure />
       <Equation />
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
@@ -39,12 +40,14 @@
 import Equation from '~/components/Equation.vue'
 import Graph from '~/components/Graph.vue'
 import Schale from '~/components/Schale.vue'
+import Figure from '~/components/Figure.vue'
 
 export default {
   components: {
     Equation,
     Graph,
-    Schale
+    Schale,
+    Figure
   },
   data () {
     return {
