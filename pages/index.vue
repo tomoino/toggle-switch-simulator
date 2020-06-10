@@ -4,7 +4,10 @@
       <h1 class="title">
         Toggle Switch Simulator
       </h1>
-      <Figure />
+      <!-- <Figure /> -->
+        <img src="~/assets/fig1.png" width="60%"/>
+        <br>
+        <img src="~/assets/fig2.png" width="60%"/>
       <Equation />
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
