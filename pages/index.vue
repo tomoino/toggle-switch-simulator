@@ -4,11 +4,12 @@
       <h1 class="title">
         Toggle Switch Simulator
       </h1>
-      <!-- <Figure /> -->
-        <img src="~/assets/fig1.png" width="60%"/>
+      <div style="margin: 0 30vw;">
+        <img src="~/assets/fig1.png" width="100%"/>
         <br>
-        <img src="~/assets/fig2.png" width="60%"/>
-      <Equation />
+        <img src="~/assets/fig2.png" width="100%"/>
+      </div>
+      <Equation style="font-size: 4vh;"/>
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
           <Graph :values="firstGraphData"/>
@@ -30,7 +31,8 @@
           </div>
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
-          <Schale :value="stableU/3"/>    
+          <Schale :value="stableU/3"/>
+          ※転写因子濃度uに依存してGFPが発現
         </vs-col> 
       </vs-row>
 
@@ -328,7 +330,7 @@ export default {
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: block;
   font-weight: 300;
-  font-size: 40px;
+  font-size: 5vh;
   color: #35495e;
   letter-spacing: 1px;
   text-transform: capitalize;
