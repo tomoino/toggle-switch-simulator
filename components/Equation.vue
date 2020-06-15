@@ -13,9 +13,3 @@ import "~/node_modules/katex/dist/katex.min.css" // 追加
 export default {
 }
 </script>
-
-<style scoped>
-    p {
-        font-size: 30px;
-    }
-</style>
