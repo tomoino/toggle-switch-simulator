@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div class="container" style="padding: 20px 30vw;">
     <div>
       <h1 class="title">
         Toggle Switch Simulator
       </h1>
-      <div style="margin: 0 30vw;">
+      <div>
         <img src="~/assets/fig1.png" width="100%"/>
         <br>
         <img src="~/assets/fig2.png" width="100%"/>
@@ -31,8 +31,14 @@
           </div>
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
-          <Schale :value="stableU/3"/>
-          ※転写因子濃度uに依存してGFPが発現
+          <vs-row>
+            <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="12" vs-sm="12" vs-xs="12">
+              <Schale :value="stableU/3"/>
+            </vs-col>
+            <vs-col style="margin-top: 30px;" vs-type="flex" vs-justify="center" vs-align="center" vs-lg="12" vs-sm="12" vs-xs="12">
+              <p>※転写因子濃度uに依存してGFPが発現</p>
+            </vs-col>
+          </vs-row>
         </vs-col> 
       </vs-row>
 
