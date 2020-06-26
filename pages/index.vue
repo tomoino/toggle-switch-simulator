@@ -8,20 +8,21 @@
         <img src="~/assets/fig1.png" width="100%"/>
         <br>
         <img src="~/assets/fig2.png" width="100%"/>
-      </div>
+      </div> 
       <Equation style="font-size: 4vh;"/>
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
-          <Graph :values="firstGraphData"/>
+          <Graph :values="firstGraphData" style="width:94%;"/>
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
-          <Graph :values="secondGraphData"/>
+          <Graph :values="secondGraphData" style="width:94%;" />
         </vs-col> 
       </vs-row>
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
-          <div style="margin:auto 50px;text-align: center;">
-            <h3 style="margin-bottom:-12px;">u0 = {{Math.floor(u0*100)/100}}</h3><vs-slider :max="U0_MAX*100" v-model="u0Slider"/>
+          <div style="margin:50px auto;text-align: center;">
+            <h3 style="margin-bottom:-12px;">u0 = {{Math.floor(u0*100)/100}}</h3>
+            <vs-slider :max="U0_MAX*100" v-model="u0Slider"/>
             <h3 style="margin-bottom:-12px;margin-top:25px;">v0 = {{Math.floor(v0*100)/100}}</h3><vs-slider :max="V0_MAX*100"  v-model="v0Slider"/>
             <h3 style="margin-bottom:-12px;margin-top:25px;">I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="I1_MAX*100" v-model="I1Slider"/>
             <h3 style="margin-bottom:-12px;margin-top:25px;">I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="I2_MAX*100" v-model="I2Slider"/>
