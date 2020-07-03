@@ -11,18 +11,22 @@
       </div> 
       <Equation style="font-size: 4vh;"/>
       <vs-row>
-        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
+        <vs-col vs-type="flex" vs-justify="center" vs-align="flex-start" vs-lg="6" vs-sm="6" vs-xs="12">
           <Graph :values="firstGraphData" style="width:94%;"/>
         </vs-col>
-        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
-          <Graph :values="secondGraphData" style="width:94%;" />
+        <vs-col vs-type="flex" vs-justify="center" vs-align="flex-start" vs-lg="6" vs-sm="6" vs-xs="12">
+          <Graph :values="secondGraphData" style="width:94%;">
+            <vs-switch v-model="nullclineDisplay" style="margin: auto;">
+              <span slot="on">ヌルクライン表示</span>
+              <span slot="off">ヌルクライン非表示</span>
+            </vs-switch>
+          </Graph>
         </vs-col> 
       </vs-row>
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-lg="6" vs-sm="6" vs-xs="12">
           <div style="margin:50px auto;text-align: center;">
-            <h3 style="margin-bottom:-12px;">u0 = {{Math.floor(u0*100)/100}}</h3>
-            <vs-slider :max="U0_MAX*100" v-model="u0Slider"/>
+            <h3 style="margin-bottom:-12px;">u0 = {{Math.floor(u0*100)/100}}</h3><vs-slider :max="U0_MAX*100" v-model="u0Slider"/>
             <h3 style="margin-bottom:-12px;margin-top:25px;">v0 = {{Math.floor(v0*100)/100}}</h3><vs-slider :max="V0_MAX*100"  v-model="v0Slider"/>
             <h3 style="margin-bottom:-12px;margin-top:25px;">I1 = {{Math.floor(I1*100)/100}}</h3><vs-slider :max="I1_MAX*100" v-model="I1Slider"/>
             <h3 style="margin-bottom:-12px;margin-top:25px;">I2 = {{Math.floor(I2*100)/100}}</h3><vs-slider :max="I2_MAX*100" v-model="I2Slider"/>
@@ -42,8 +46,6 @@
           </vs-row>
         </vs-col> 
       </vs-row>
-
-      
     </div>
   </div>
 </template>
@@ -77,7 +79,8 @@ export default {
       bSlider: 100,
       stableU: 0,
       uLast: 0,
-      vLast: 0
+      vLast: 0,
+      nullclineDisplay: false
     }
   },
   methods: {
@@ -214,7 +217,7 @@ export default {
       init[initApproIndex] = this.v0
       last[lastApproIndex] = this.vLast
 
-      return {
+      let graphData =  {
         x:U,
         y:[
           {
@@ -292,6 +295,12 @@ export default {
           }
         }
       }
+      
+      if (!this.nullclineDisplay) {
+        graphData.y.splice(0,2) // ヌルクラインのデータを削除
+        graphData.options.title.text = '初期濃度と最終濃度'
+      }
+      return graphData
     }
   },
   computed: {

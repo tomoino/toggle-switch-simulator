@@ -1,6 +1,7 @@
 <template>
     <div>
         <line-chart :chart-data="datacollection" :options="values.options"></line-chart>
+        <slot/>
     </div>
 </template>
  
