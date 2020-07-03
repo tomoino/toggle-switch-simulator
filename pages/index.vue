@@ -15,13 +15,12 @@
           <Graph :values="firstGraphData" style="width:94%;"/>
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="flex-start" vs-lg="6" vs-sm="6" vs-xs="12">
-          <div>
-            <Graph :values="secondGraphData" style="width:94%;" />
+          <Graph :values="secondGraphData" style="width:94%;">
             <vs-switch v-model="nullclineDisplay" style="margin: auto;">
               <span slot="on">ヌルクライン表示</span>
               <span slot="off">ヌルクライン非表示</span>
             </vs-switch>
-          </div>
+          </Graph>
         </vs-col> 
       </vs-row>
       <vs-row>
@@ -218,7 +217,7 @@ export default {
       init[initApproIndex] = this.v0
       last[lastApproIndex] = this.vLast
 
-      return {
+      let graphData =  {
         x:U,
         y:[
           {
@@ -296,6 +295,12 @@ export default {
           }
         }
       }
+      
+      if (!this.nullclineDisplay) {
+        graphData.y.splice(0,2) // ヌルクラインのデータを削除
+        graphData.options.title.text = '初期濃度と最終濃度'
+      }
+      return graphData
     }
   },
   computed: {
