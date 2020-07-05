@@ -30,8 +30,7 @@ export default {
   */
   plugins: [
     '@/plugins/vuesax',
-    '@/plugins/line-chart',
-    "~/plugins/katex"
+    '@/plugins/line-chart'
   ],
   /*
   ** Nuxt.js dev-modules
