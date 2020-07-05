@@ -7,8 +7,8 @@
  
 <script>
 import MarkdownIt from 'markdown-it'
-import markdownItKatex from 'markdown-it-katex' // 追加
-import "~/node_modules/katex/dist/katex.min.css" // 追加
+import markdownItKatex from 'markdown-it-katex'
+import "~/node_modules/katex/dist/katex.min.css"
 
 export default {
 }
