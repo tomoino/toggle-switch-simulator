@@ -238,16 +238,16 @@ export default {
           },
           {
             label: '初期濃度',
-            pointBackgroundColor: 'rgba(255, 100, 100,  0.8)',
-            borderColor: 'rgba(255, 100, 100,  0.8)',
+            pointBackgroundColor: 'rgba(255, 150, 50,  0.8)',
+            borderColor: 'rgba(255, 150, 50,  0.8)',
             fill: false,
             pointRadius: 5,
             data: init
           },
           {
             label: '最終濃度',
-            pointBackgroundColor: 'rgba(100, 100, 255,  0.8)',
-            borderColor: 'rgba(100, 100, 255, 0.8)',
+            pointBackgroundColor: 'rgba(100, 255, 100, 0.8)',
+            borderColor: 'rgba(100, 255, 100, 0.8)',
             fill: false,
             pointRadius: 5,
             data: last
